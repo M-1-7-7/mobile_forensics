@@ -84,6 +84,8 @@ extract_logs() {
 
 # Turns .logarchive to a .log  
 create_log_file(){
+
+  # Create the unified log from logarchive
   find . -mindepth 1 -maxdepth 2 -name "*.logarchive" | while read -r sysdiag; do
     prefix=$(basename "$(dirname "$sysdiag")" | cut -d'_' -f1-3)
     file_name="${out_dir}${prefix}.log"
@@ -93,10 +95,28 @@ create_log_file(){
     echo
     log show --archive "$sysdiag" --info --debug --signpost --backtrace --loss > "$file_name"
   done
+
+  # Create the unified log from diagnostics archive
+  find . -name "diagnostics" | while read -r diag; do
+    file_name="${diag}.log"
+    echo "found $diag, now converting to .log and directing it here $out_dir"
+    echo
+    log show --archive "$diag" --info --debug --signpost --backtrace --loss > "$file_name"
+  done
+
+  # Create the unified log from uuidtext archive
+  find . -name "uuidtext" | while read -r diag; do
+    file_name="${diag}.log"
+    echo "found $diag, now converting to .json and directing it here $out_dir"
+    echo
+    log show --archive "$diag" --info --debug --signpost --backtrace --loss > "$file_name"
+  done
 }
 
 # Turns .logarchive to a .json  
 create_json_file(){
+
+  # Create the unified log from logarchive
   find . -mindepth 1 -maxdepth 2 -name "*.logarchive" | while read -r sysdiag; do
     prefix=$(basename "$(dirname "$sysdiag")" | cut -d'_' -f1-3)
     file_name="${out_dir}${prefix}.json"
@@ -105,19 +125,35 @@ create_json_file(){
     echo
     log show --archive "$sysdiag" --info --debug --signpost --backtrace --loss --style json > "$file_name"
   done
+
+  # Create the unified log from diagnostics archive
+  find . -name "diagnostics" | while read -r diag; do
+    file_name="${diag}.json"
+    echo "found $diag, now converting to .json and directing it here $out_dir"
+    echo
+    log show --archive "$diag" --info --debug --signpost --backtrace --loss --style json > "$file_name"
+  done
+
+  # Create the unified log from uuidtext archive
+  find . -name "uuidtext" | while read -r diag; do
+    file_name="${diag}.json"
+    echo "found $diag, now converting to .json and directing it here $out_dir"
+    echo
+    log show --archive "$diag" --info --debug --signpost --backtrace --loss --style json > "$file_name"
+  done
 }
 
 # Turns .json to jsonl
 create_jsonl_file(){
+
   # check if this has been run before
   if [[ $json_file -eq 1 ]]; then
     create_json_file
   fi
 
   cd $out_dir
-  #!/bin/bash
 
-  # Find all .json files
+  # Create the unified log from logarchive
   for json_file in ./*.json; do
 
     jsonl_file="${json_file%.json}.jsonl"
@@ -126,7 +162,7 @@ create_jsonl_file(){
     # Use jq to write each object from an array on a new line
     jq -c '.[]' "$json_file" > "$jsonl_file" 
   
-  done
+  done  
 }
 
 main(){
@@ -145,7 +181,8 @@ main(){
   if [[ $to_log -eq 0 && $to_json -eq 0 && $to_jsonl -eq 0 ]] || [[ $to_jsonl -eq 1 ]]; then
     create_jsonl_file
   fi
-  # Clean up by deleatiung the syslogarchive diresctory that was made 
+
+  # Clean up by deleating the syslogarchive diresctory that was made 
   rm -r $tmp_dir
 }
 
