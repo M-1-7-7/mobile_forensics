@@ -1,24 +1,24 @@
-## [cite_start]Analysis Process [cite: 1]
+## Analysis Process 
 
-### [cite_start]Rip Phone (Quick & FFS) [cite: 2]
-* [cite_start]Use one of the commercial tools[cite: 3].
-* [cite_start]First, create an image of the device with a quick scan, then do a full file system rip[cite: 4].
-* [cite_start]To increase the chances of success, ensure the hardware is up to date[cite: 5].
-* [cite_start]Follow the individual setup requirements of the tools for successful data processing[cite: 6].
+### Rip Phone (Quick & FFS)
+* Use one of the commercial tools.
+* First, create an image of the device with a quick scan, then do a full file system rip
+* To increase the chances of success, ensure the hardware is up to date
+* Follow the individual setup requirements of the tools for successful data processing
 
-### [cite_start]Create iTunes Backup [cite: 7]
-#### [cite_start]Use ilibmobile package (Ubuntu) [cite: 8]
-[cite_start]Using the `ilibmobiles idevicebackup2` to create the iTunes backup is the preferred method[cite: 9]. [cite_start]To do this, make sure you are in the `tools.venv` python environment and follow these steps[cite: 10]:
+### Create iTunes Backup
+#### Use ilibmobile package (Ubuntu)
+Using the `ilibmobiles idevicebackup2` to create the iTunes backup is the preferred method. To do this, make sure you are in the `tools.venv` python environment and follow these steps
 
-1.  [cite_start]Establish trust between the iPhone and the server by interfacing with the iPhone[cite: 11].
-2.  [cite_start]Use the `idevice_id` command to find the UUID of the device[cite: 12].
-3.  [cite_start]Turn on encryption and set the password to "admin" to ensure the most comprehensive backup[cite: 13, 14]. [cite_start]The command is `idevicebackup2 encyption on admin`[cite: 14].
-4.  [cite_start]Use the `idevicebackup2` command in the following format: `idevicebackup2 -u <uuid> backup --full <dest>`[cite: 15, 16].
-5.  [cite_start]A directory with the UUID of the device as its name should be created[cite: 17].
-6.  [cite_start]It is good practice to turn off encryption after the process is complete with the command `idevicebackup2 encyption off admin`[cite: 18, 19].
+1.  Establish trust between the iPhone and the server by interfacing with the iPhone
+2.  Use the `idevice_id` command to find the UUID of the device[cite: 12].
+3.  Turn on encryption and set the password to "admin" to ensure the most comprehensive backup The command is `idevicebackup2 encyption on admin`.
+4.  Use the `idevicebackup2` command in the following format: `idevicebackup2 -u <uuid> backup --full <dest>`.
+5.  A directory with the UUID of the device as its name should be created.
+6.  It is good practice to turn off encryption after the process is complete with the command `idevicebackup2 encyption off admin`.
 
-#### [cite_start]Use iTunes for Windows GUI [cite: 20]
-[cite_start]Sometimes, due to issues with iOS versions and phones, alternative methods are needed[cite: 21]. [cite_start]You can use iTunes that has been downloaded directly from the Apple website, not the Windows store, on analyst laptops[cite: 21].
+#### Use iTunes for Windows GUI 
+Sometimes, due to issues with iOS versions and phones, alternative methods are needed. You can use iTunes that has been downloaded directly from the Apple website, not the Windows store, on analyst laptops
 
 1.  [cite_start]Begin by plugging in the device and trusting it[cite: 22].
 2.  [cite_start]Sign in to iTunes with the account of the device[cite: 23].
